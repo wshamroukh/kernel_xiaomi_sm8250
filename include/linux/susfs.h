@@ -57,8 +57,13 @@ struct st_sdcard_path {
 /* sus_mount */
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 struct st_susfs_sus_mount {
-	char                    				target_pathname[SUSFS_MAX_LEN_PATHNAME];
-	int                                     err;
+	char                    target_pathname[SUSFS_MAX_LEN_PATHNAME];
+	unsigned long           target_dev;
+};
+
+struct st_susfs_sus_mount_list {
+	struct list_head                        list;
+	struct st_susfs_sus_mount               info;
 };
 
 struct st_susfs_hide_sus_mnts_for_all_procs {
