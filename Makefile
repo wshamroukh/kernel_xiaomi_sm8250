@@ -762,10 +762,13 @@ KBUILD_CFLAGS += $(call cc-option, -mllvm -disable-struct-const-merge)
 KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
 KBUILD_CFLAGS += $(call cc-option, -fcatch-undefined-behavior)
 
-# Newer Clang (21+): typecheck() dummies and const struct members trip these under -Werror
+# Newer Clang: typecheck() dummies and const struct members fail under -Werror
 KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-unsafe)
 KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-var-unsafe)
 KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-field-unsafe)
+
+# Newer Clang: mixed enum returns (e.g. A_STATUS vs QDF_STATUS in qcacld)
+KBUILD_CFLAGS += $(call cc-disable-warning, implicit-enum-enum-cast)
 endif
 
 # These warnings generated too much noise in a regular build.
