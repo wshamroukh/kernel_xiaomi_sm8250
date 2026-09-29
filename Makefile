@@ -761,6 +761,11 @@ KBUILD_CFLAGS += $(call cc-option, -mllvm -disable-struct-const-merge)
 # Quiet clang warning: comparison of unsigned expression < 0 is always false
 KBUILD_CFLAGS += $(call cc-disable-warning, tautological-compare)
 KBUILD_CFLAGS += $(call cc-option, -fcatch-undefined-behavior)
+
+# Newer Clang (21+): typecheck() dummies and const struct members trip these under -Werror
+KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-unsafe)
+KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-var-unsafe)
+KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-field-unsafe)
 endif
 
 # These warnings generated too much noise in a regular build.
