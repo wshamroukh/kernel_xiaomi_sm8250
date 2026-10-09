@@ -18,6 +18,10 @@
 #include <linux/pagemap.h>
 #include <linux/compat.h>
 
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+#include <linux/susfs_def.h>
+#endif
+
 #include <linux/uaccess.h>
 #include <asm/unistd.h>
 
